@@ -61,7 +61,6 @@
           
       <a class="btn btn-info" href="novoUser.php">Novo Registo</a>
       
-      <a class="btn btn-default" href="chat.php">Entrar no CHAT</a>
       
       
   </body>

@@ -2,8 +2,9 @@
 
 require_once './estudante.php';
 
-if (session_status() == PHP_SESSION_NONE)
+        if (session_status() == PHP_SESSION_NONE){
                 session_start();
+        }
 
 
 if(isset($_POST["username"]))
@@ -20,11 +21,12 @@ if(isset($_POST["username"]) && isset($_POST["password"]))
     $sql = "SELECT * FROM utilizador where username = '" . $username . "' and password = '" . $password . "'";
     $result = $GLOBALS["db.connection"]->query($sql);
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows ==1) {
         $row = $result->fetch_assoc();
         $found = true;
-        if(!isset($_SESSION))
-        session_start();
+        if (session_status() == PHP_SESSION_NONE){
+                session_start();
+        }
         $_SESSION["username"] = $row["username"];
         $_SESSION["id"] = $row["id"];//NOVO
         $_SESSION["fraseApresentacao"] = " ". $row["nome"] ;
