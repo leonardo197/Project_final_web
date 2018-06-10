@@ -27,5 +27,3 @@
         <a class="btn btn-danger pull-right" href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Terminar Sessão</a>
     </div>
 </div>
-
-        <?php include 'avisoChat.php'; ?>

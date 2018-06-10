@@ -7,6 +7,7 @@
          <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
          <script src="angular/angular.min.js"></script>
   </head>
+  
      <body ng-app="rootApp">
       <script>
         var minhasApps = [];
@@ -55,6 +56,7 @@
 
         if(isset($_SESSION["id"]))
         {
+            include 'avisoChat.php';
             include './posts.php';
         }
             ?>

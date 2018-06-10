@@ -8,6 +8,7 @@
 	  <script src="bootstrap/jquery.min.js"></script>
           <script src="bootstrap/js/bootstrap.min.js"></script>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <script src="angular/angular.min.js"></script>
   </head>
   <body>
 <?php
@@ -19,7 +20,7 @@
     
         <div class="panel panel-default">
             <div class="panel-heading">
-                CHAT DE TESTE 
+                CHAT
                 <a class="btn btn-success pull-right" href="chat.php"><span class="glyphicon glyphicon-refresh"/></a>
             </div>
             <div class="panel-body">
@@ -113,9 +114,7 @@
                                         $("#chat").append(html);    
                                     }
                                     //COMENTAR ATÉ AQUI
-                                    
-                                    
-                                    
+
                                 });
                     }
                     $(document).ready(function(){
