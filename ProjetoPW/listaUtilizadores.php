@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
                         <td><?php echo $row["morada"] ?></td>
                         <td><?php echo $row["password"] ?></td>
                         <td>
-                            <a href="deleteUser.php?id=<?php echo $row["id"] ?>"><span class="glyphicon glyphicon-remove"></span></a>
+                            <!--<a href="deleteUser.php?id=<?php echo $row["id"] ?>"><span class="glyphicon glyphicon-remove"></span></a>-->
                         </td>
 
                     </tr>
