@@ -28,3 +28,4 @@
     </div>
 </div>
 
+        <?php include 'avisoChat.php'; ?>
