@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 
 if (session_status()==PHP_SESSION_NONE)
@@ -6,6 +7,9 @@ if (session_status()==PHP_SESSION_NONE)
 $id = $_SESSION['id'];
 
 ?>
+=======
+
+>>>>>>> parent of 26869b5... erro no like
 =======
 
 >>>>>>> parent of 26869b5... erro no like
@@ -193,6 +197,9 @@ $id = $_SESSION['id'];
     </div> 
 =======
     </div>            
+<<<<<<< HEAD
+>>>>>>> parent of 26869b5... erro no like
+=======
 >>>>>>> parent of 26869b5... erro no like
 </div>     
 
