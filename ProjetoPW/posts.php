@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 if (session_status()==PHP_SESSION_NONE)
@@ -5,6 +6,9 @@ if (session_status()==PHP_SESSION_NONE)
 $id = $_SESSION['id'];
 
 ?>
+=======
+
+>>>>>>> parent of 26869b5... erro no like
 
 <div ng-init="inicializa()" id="postApp" class="container" ng-app="postApp" ng-controller="postController">
 
@@ -185,7 +189,11 @@ $id = $_SESSION['id'];
                 </div>
             </div>
         </div>   
+<<<<<<< HEAD
     </div> 
+=======
+    </div>            
+>>>>>>> parent of 26869b5... erro no like
 </div>     
 
 
