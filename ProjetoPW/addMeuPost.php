@@ -9,8 +9,8 @@ session_start();
 $id = $_SESSION["id"];
 
 //$sql_Antes = "insert into mensagem (data,texto) VALUES(NOW(),'$mensagem')";
-$sql_novo = "insert into posts (idAutor,idPost) "
-        . " VALUES(NOW(),'$posts',$id,)";
+$sql_novo = "insert into post (idAutor,idPost) "
+        . " VALUES($id,$posts)";
 
 $GLOBALS["db.connection"]->query($sql_novo);
 

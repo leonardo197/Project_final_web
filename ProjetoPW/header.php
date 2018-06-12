@@ -17,10 +17,12 @@
             echo "Ola " . $_SESSION["fraseApresentacao"];
             ?>
         </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
         <a class="btn btn-default" href="index.php">Pagina Inicial</a>
         <a class="btn btn-default" href="chat.php">Entrar no CHAT</a>
         <a class="btn btn-default" href="">Encontrar Amigos</a>
         <a class="btn btn-default" href="">Meu Perfil</a>
+        </div>
         <!--<a class="btn btn-info" href="novoUser.php">Novo Registo</a>-->
     </div>
     <br>

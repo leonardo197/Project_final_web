@@ -13,33 +13,22 @@ $_maxIdPost = $_GET["maxIdPost"];
 
         
 //NOVA QUERY PARA A SOLUCAO DO EXERCICIO 10
-$query = "SELECT p.*, nome, count( IF(l.idAutor=$id,1,NULL) ) as meulike, count(l.idPost) as likes 
-FROM postmensagem p
+$query = "SELECT p.*, nome, count(l.idAutor=$id) as meulike, count(l.idPost) as likes 
+FROM post p
   join utilizador u on u.id = p.idAutor 
   left join likes l on l.idPost = p.idPost
-  join amigos a on a.idamigo1 = $id
+  join amigos a on a.idamigo1 = $id or a.idamigo2 =$id
   where p.idAutor = a.idamigo2 " ;
 
 if($_maxIdPost != '0')
 {
     $query = $query." AND p.idPost >  $_maxIdPost";
 }
-
 $query = $query." group by p.idPost 
   order by p.idPost DESC";
 
 $result = $GLOBALS["db.connection"]->query($query);
-        
 
-
-       /* ("SELECT p.*, nome, count( IF(l.idAutor=$id,1,NULL) ) as meulike, count(l.idPost) as likes ".
-"FROM postmensagem p ".
-  "join utilizador u on u.id = p.idAutor ".
-  "left join likes l on l.idPost = p.idPost ".
-  "group by p.idPost " .
-  "order by p.idPost DESC");
-        
-        */
 
 if($result == false)
 {
@@ -56,4 +45,3 @@ include './mysql/mysqlClose.php';
 
 
 ?>
-

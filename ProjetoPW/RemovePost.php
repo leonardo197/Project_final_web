@@ -9,9 +9,7 @@ session_start();
 
 $id = $_SESSION["id"];
 
-$sql_novo = "Delete into postmensagem (idAutor,idPost) "
-        . " VALUES(NOW(),'$posts',$id,)";
-       
+$sql_novo = "DELETE FROM post WHERE idPost='$posts'";
 $result = $GLOBALS["db.connection"]->query($sql_novo);
 
 include './mysql/mysqlClose.php';
