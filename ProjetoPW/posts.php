@@ -1,3 +1,5 @@
+
+
 <div ng-init="inicializa()" id="postApp" class="container" ng-app="postApp" ng-controller="postController">
 
     <!--NOVO SOLUCAO todo o script é novo-->
@@ -184,8 +186,7 @@
             </div>
         </div>   
     </div>            
-</div>    
-
+</div>     
 
 
 

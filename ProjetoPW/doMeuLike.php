@@ -19,7 +19,8 @@ $result = $GLOBALS["db.connection"]->query($sql_novo);
 include './mysql/mysqlClose.php';
 
 while($row = $result->fetch_assoc()) 
-{   
+{
+    
          echo '{ "resposta" : true }';
     
 }
