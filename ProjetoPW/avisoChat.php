@@ -1,12 +1,6 @@
-<style>
-    .header{
-        background-color: #9acfea;   
-        padding:10px;
-        font-size: 16pt;
-    }    
-</style>
 
-<div  class="header" id="indexApp" ng-app="indexApp" ng-controller="indexController" ng-init="inicializa()">
+
+<div id="indexApp" ng-app="indexApp" ng-controller="indexController" ng-init="inicializa()">
     <!--NOVO SOLUCAO todo o script é novo-->
     <script>
     var app = angular.module('indexApp', []);
