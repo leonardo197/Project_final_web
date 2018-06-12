@@ -29,7 +29,3 @@
         <a class="btn btn-danger pull-right" href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Terminar Sessão</a>
     </div>
 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 26869b5... erro no like
