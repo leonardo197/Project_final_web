@@ -39,10 +39,10 @@ include './mysql/mysqlConnect.php';
                         {
                             //alert("Post on");
                             $.post(
-                                    "addPostsRest.php",
+                                    "addamigos.php",
                                     {
-                                        "frases": $scope.frases
-
+                                    "destinatario": $scope.novoamigo,
+                                    "mensagem": $scope.mensagem
                                     },
                                     function (dados)
                                     {
@@ -57,7 +57,7 @@ include './mysql/mysqlConnect.php';
 
                 <!--SOLUCAO todo o script faz parte da solução-->
 
-                <select id="destinatarioSelect" class="form-control" name="destinatario">
+                <select class="form-control" ng-model="novoamigo">
                     <?php
                     $result = $GLOBALS["db.connection"]->query(
                             "select * from utilizador");
@@ -70,7 +70,7 @@ include './mysql/mysqlConnect.php';
                     }
                     ?>
                 </select>
-                <textarea ng-model="frases" placeholder="Escreva aqui o seu post" class="form-control" id="txtpost" rows="3"></textarea>
+                <textarea ng-model="frases" placeholder="Escreva aqui a sua mensagem" class="form-control" id="txtpost" rows="3"></textarea>
                 <a  ng-click="enviar()" ><span class="btn btn-success glyphicon glyphicon-send pull-right" type="button" />  SEGIR</a>
                 <a  ng-click="deletePost(p.idPost);" id="startedby"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" />  NAO SEGIR</a>
                 </form>

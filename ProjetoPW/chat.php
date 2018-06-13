@@ -8,19 +8,96 @@
 	  <script src="bootstrap/jquery.min.js"></script>
           <script src="bootstrap/js/bootstrap.min.js"></script>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          
+          <!--NOVO SOLUCAO-->
           <script src="angular/angular.min.js"></script>
   </head>
-  <body>
+  <body ng-app="rootApp">
+      <script>
+        var minhasApps = [];
+        var rootApp = angular.module('rootApp', minhasApps);
+      </script>
 <?php
         include './header.php';
 ?>
+    <?php
+    if(!isset($_SESSION))
+        session_start();
+    $id = $_SESSION["id"];
+    ?>
       
-    <!--COLOCAR AQUI neste div AS DECLARACOES DO ANGULAR ng-app ng-controller e id-->
-    <div class="container">
+    <!--NOVO SOLUCAO foram colocados os atributos ng-app ng-controller e id-->
+    <div ng-init="inicializa()" id="chatApp" class="container" ng-app="chatApp" ng-controller="chatController">
+        
+        <!--NOVO SOLUCAO todo o script é novo-->
+        <script>
+            var app = angular.module('chatApp', []);
+            minhasApps.push('chatApp');//LINHA NOVA puxando a indexApp para as minhasApps que é o array de modulos da rootApp
+            app.controller('chatController', function ($scope) {
+                $scope.mensagens = [];
+                $scope.amigoDeConversa = 0;
+                $scope.mensagem = "";
+                $scope.mensagemErro = "";
+                
+                $scope.inicializa = function()
+                {
+                    setInterval("angular.element($('#chatApp')).scope().chamaServicoLeitura()",1000);          
+                }
+                
+                $scope.envia = function()
+                {
+                        //var amigoDeConversa = $("select option:selected" ).attr("value");
+                        //var mensagem = $("#mensagem").val();
+                        //$("#mensagem").val("");
+                        $scope.mensagemErro = "";
+                        $.getJSON(
+                                "addMensagemRest.php",
+                                {
+                                    "destinatario" : $scope.amigoDeConversa,
+                                    "mensagem" :  $scope.mensagem
+                                },
+                                function(dados)
+                                {
+                                    $scope.mensagem = "";
+                                    //alert(dados);
+                                    if(dados.resposta == false)
+                                    {
+                                        $scope.mensagemErro = "ERRO DE COMUNICACAO";
+                                    }
+                                    $scope.$apply();
+                                    
+                                },
+                                function(){
+                                    $scope.mensagemErro = "ERRO DE COMUNICACAO";
+                                     $scope.$apply();
+                                }
+                        );
+                };
+                
+                $scope.chamaServicoLeitura  = function()
+                {
+                        //var amigoDeConversa = $("select option:selected" ).attr("value");
+                        $.getJSON(
+                                "servicoLeitura.php",
+                                {
+                                    "amigoDeConversaId" : $scope.amigoDeConversa
+                                },
+                                function(jsonData)
+                                {
+                                    //angular.element($("#chatApp")).scope().mensagens = jsonData;
+                                    //angular.element($("#chatApp")).scope().$apply();
+                                    $scope.mensagens = jsonData;
+                                    $scope.$apply();
+                                });
+                }
+                
+            });
+        </script>
+            
     
         <div class="panel panel-default">
             <div class="panel-heading">
-                CHAT
+                CHAT DE TESTE 
                 <a class="btn btn-success pull-right" href="chat.php"><span class="glyphicon glyphicon-refresh"/></a>
             </div>
             <div class="panel-body">
@@ -31,136 +108,48 @@
                         padding:10px;
                     }
                 </style>
-                
-                <?php
-                if (session_status() == PHP_SESSION_NONE)
-                session_start();
-                $id = $_SESSION["id"];
-                ?>
-                
-                
                 <div class="chat" id="chat">
-                    
-                <?php
-                //Segunda query melhorada
-                $result = $GLOBALS["db.connection"]->query(
-                    "select * from mensagem m join utilizador autor on autor.id = m.idAutor "
-                        . " where "
-                    . " ( m.idAutor = $id ) "
-                    . " OR "
-                    . " ( m.idTarget = $id ) "
-                    );
-
-                   
-                    while($row = $result->fetch_assoc())           
-                    {
-                        if($row["idAutor"] == $id)
-                        {
-                            echo "<div class='row'><div class='col-md-12'><label class='pull-left'> <label class='label label-success'>" . $row["nome"] . "</label> - " . $row["data"] . " - " . $row["texto"] . "</label></div></div>";
-                        }
-                        else
-                        {
-                            echo "<div class='row'><div class='col-md-12'><label class=' pull-right'>  <label class='label label-info'>" . $row["nome"] . "</label> - " . $row["data"] . " - " . $row["texto"] . "</label></div></div>";    
-                        }
-                        
-                    }
-                ?>
+                    <div class='row' ng-repeat="m in mensagens" >
+                        <div class='col-md-12'>
+                            <label ng-class="{'pull-left': m.idAutor == <?php echo $id?>,'pull-right' : m.idAutor != <?php echo $id?>}">
+                                <label class='label' ng-class="{'label-success': m.idAutor == <?php echo $id?>,'label-info' : m.idAutor != <?php echo $id?>}"><!--Alterado SOLUCAO-->
+                                    {{m.nomeAutor}}
+                                </label> - 
+                                {{m.data}}
+                                 - 
+                                {{m.texto}} 
+                            </label>
+                        </div>
+                    </div>
                 </div>
                     
                 <!--SOLUCAO todo o script faz parte da solução-->
-                <script>
-                    function chamaServicoLeitura()
-                    {
-                        var amigoDeConversa = $("select option:selected" ).attr("value");
-                        
-                        $.getJSON(
-                                "servicoLeitura.php",
-                                {
-                                    "amigoDeConversaId" : amigoDeConversa
-                                },
-                                function(jsonData)
-                                {
-                                    //COLOCAR AQUI AS CHAMADAS AO ANGULAR PARA ALTERAR MENSAGENS
-                                    
-                                    //NO EXERCICIO NO PONTO 12
-                                    //COMENTAR DAQUI ATÉ AO PROXIMO COMENTARIO
-                                    //de modo a ficar apenas com as chamadas ao angular
-                                    //dentro da function(jsonData)
-                                    
-                                    $("#chat").empty();
-                                    for(m in jsonData)
-                                    {
-                                        var msg = jsonData[m];
-                                        var pull = "pull-right";
-                                        var infoStyle = "label-info";
-                                        if(msg.idAutor == <?php echo $id?>)
-                                        {
-                                            pull = "pull-left";
-                                            infoStyle = "label-success";
-                                        }
-                                        
-                                        var html = "<div class='row'>" +
-                                                        "<div class='col-md-12'>" + 
-                                                            "<label class='" + pull + "'>" +
-                                                                "<label class='label " + infoStyle + "'>" +
-                                                                    msg.idAutor +
-                                                                "</label> - " +
-                                                                msg.data +
-                                                                " - " +
-                                                                msg.texto +
-                                                            "</label>" + 
-                                                        "</div>" + 
-                                                    "</div>";
-                                        $("#chat").append(html);    
-                                    }
-                                    //COMENTAR ATÉ AQUI
-
-                                });
-                    }
-                    $(document).ready(function(){
-                        setInterval(chamaServicoLeitura,3000);
-                        $("#btnEnvio").click(
-                            function(){
-                                var amigoDeConversa = $("select option:selected" ).attr("value");
-                                var mensagem = $("#mensagem").val();
-                                $.post(
-                                        "addMensagemRest.php",
-                                        {
-                                            "destinatario" : amigoDeConversa,
-                                            "mensagem" :  mensagem
-                                        },
-                                        function(dados)
-                                        {
-                                            alert(dados);
-                                        }
-                                );
-                            });
-                       
-                    });
-                </script>
-                <form class="form-horizontal" action="addMensagem.php" method="post">
+               
+                
                     <!--NOVO DO OBJETIVO 2-->
-                    <select id="destinatarioSelect" class="form-control" name="destinatario">
-                        <?php
-                            $result = $GLOBALS["db.connection"]->query(
-                                    "select * from utilizador");
-                            while($row = $result->fetch_assoc())           
-                            {
-                                ?>
-                                <option value="<?php echo $row["id"] ?>">
-                                    <?php echo $row["nome"] ?>
-                                </option>    
-                                <?php
-                            }
+                    <select class="form-control" ng-model="amigoDeConversa">
+
+                    <?php
+                    $result = $GLOBALS["db.connection"]->query(
+                            "select * from utilizador");
+                    while ($row = $result->fetch_assoc()) {
                         ?>
+                        <option value="<?php echo $row["id"] ?>">
+                            <?php echo $row["nome"] ?>
+                        </option>    
+                        <?php
+                    }
+                    ?>
                     </select>
                     <!--NOVO DO OBJETIVO 2-->
                     
-                    
-                    <input id="mensagem" placeholder="Coloque aqui a mensagem..." class="form-control" type="text" name="mensagem"/>
+                    <div ng-show="mensagemErro != ''" class="alert alert-danger">
+                        {{mensagemErro}}
+                    </div>
+                    <input ng-model="mensagem"  placeholder="Coloque aqui a mensagem..." class="form-control" type="text" />
                     <!--SOLUCAO DAR ID E MUDAR O TYPE PARA button para nao submeter o form-->
-                    <button id="btnEnvio" class="btn btn-success btn-xs" type="button">Enviar</button>
-                </form>
+                    <button ng-click="envia()" class="btn btn-success btn-xs" type="button">Enviar</button>
+                
             </div>
         </div>
         
