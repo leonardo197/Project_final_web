@@ -1,15 +1,3 @@
-
-<<<<<<< HEAD
-<?php
-
-if (session_status()==PHP_SESSION_NONE)
-    session_start();
-$id = $_SESSION['id'];
-
-?>
-=======
->>>>>>> parent of 26869b5... erro no like
-
 <div ng-init="inicializa()" id="postApp" class="container" ng-app="postApp" ng-controller="postController">
 
     <!--NOVO SOLUCAO todo o script é novo-->
@@ -152,11 +140,17 @@ $id = $_SESSION['id'];
                 }
             };
         });
+
+
+
+
+
+
     </script>
 
 
 
- <br>
+
     <br>
     <br>
     <textarea ng-model="frases" placeholder="Escreva aqui o seu post" class="form-control" id="txtpost" rows="3"></textarea>
@@ -180,7 +174,7 @@ $id = $_SESSION['id'];
                             <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> {{p.nome}} |
                             <label id="started">{{p.data}}</label> |
                             <a href="" ng-click="removeLike(p.idPost, p.meulike);" id="startedby"><img src="img/{{p.meulike}}.png" style="height: 10px;"/></a> {{p.likes}} | 
-                            <a ng-click="deletePost(p.idPost);" ng-class="$p.idAutor == <?php echo $id; ?> ? '' : 'invisible'" id="startedby" href="posts.php"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" /></a>
+                            <a href="index.php" ng-click="deletePost(p.idPost);" id="startedby"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" /></a>
                         </div>
                         <div class="panel-body">
                             <p>{{p.texto}}</p>
@@ -189,15 +183,9 @@ $id = $_SESSION['id'];
                 </div>
             </div>
         </div>   
-
-    </div> 
-
     </div>            
-<<<<<<< HEAD
+</div>    
 
-=======
->>>>>>> parent of 26869b5... erro no like
-</div>     
 
 
 
