@@ -57,8 +57,9 @@
 
         if(isset($_SESSION["id"]))
         {
-            include 'avisoChat.php';
+
             include './posts.php';
+                        
         }
             ?>
 

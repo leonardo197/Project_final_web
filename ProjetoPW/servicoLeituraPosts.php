@@ -13,7 +13,7 @@ $_maxIdPost = $_GET["maxIdPost"];
 
         
 //NOVA QUERY PARA A SOLUCAO DO EXERCICIO 10
-$query = "SELECT p.*, nome, count(l.idAutor=$id) as meulike, count(l.idPost) as likes 
+$query = "SELECT p.*, nome, count(IF(l.idAutor=$id,1,NULL)) as meulike, count(l.idPost) as likes 
 FROM post p
   join utilizador u on u.id = p.idAutor 
   left join likes l on l.idPost = p.idPost
