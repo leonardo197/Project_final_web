@@ -16,7 +16,10 @@ $sql_novo = "insert into mensagem (data,texto,idAutor,idTarget) "
 
 $GLOBALS["db.connection"]->query($sql_novo);
 
+$sql_novo = "insert into amigos (idAmigo1,idAmigo2) "
+        . " VALUES(NOW(),'$id'$destinatario)";
 
+$GLOBALS["db.connection"]->query($sql_novo);
 
 
 
