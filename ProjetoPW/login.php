@@ -1,6 +1,6 @@
 <?php
 
-require_once './estudante.php';
+//require_once './estudante.php';
 
         if (session_status() == PHP_SESSION_NONE){
                 session_start();

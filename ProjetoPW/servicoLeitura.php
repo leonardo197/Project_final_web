@@ -6,8 +6,8 @@ header("Content-type: application/json");
 include './mysql/mysqlConnect.php';
 
 $amigoDeConversaId = $_GET["amigoDeConversaId"];
-
-session_start();
+    if (session_status() == PHP_SESSION_NONE)
+        session_start();
 $id = $_SESSION["id"];
 $result = $GLOBALS["db.connection"]->query(
         "select * from mensagem where "

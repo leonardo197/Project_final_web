@@ -27,7 +27,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="amigos.php">Encontrar Amigos</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="">Meu Perfil</a>
+                    <li class="nav-item"><a class="nav-link" href="perfil.php">Meu Perfil</a>
                     </li>
                 </ul>
                 <!--        <div class="btn-group" role="group" aria-label="Basic example">
