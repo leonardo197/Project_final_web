@@ -27,7 +27,6 @@ include './mysql/mysqlConnect.php';
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Enviar pedido de amizade
-
                 </div>
                 <div class="panel-body">
 
@@ -63,25 +62,28 @@ include './mysql/mysqlConnect.php';
                     </script>
 
                 </div>
+                <form class="form-horizontal" action="addamigos.php" method="POST">>
+                    <!--SOLUCAO todo o script faz parte da solução-->
 
-                <!--SOLUCAO todo o script faz parte da solução-->
-
-                <select class="form-control" ng-model="novoamigo">
-                    <?php
-                    $result = $GLOBALS["db.connection"]->query(
-                            "select * from utilizador");
-                    while ($row = $result->fetch_assoc()) {
+                    <select class="form-control novoamigo" ng-model="novoamigo">
+                        <?php 
+                        $result = $GLOBALS["db.connection"]->query(
+                                "select * from utilizador");
+                        while ($row = $result->fetch_assoc()) {
+                            ?>
+                            <option value="<?php echo $row["id"] ?>">
+                                <?php echo $row["nome"] ?>
+                            </option>    
+                            <?php
+                        }
                         ?>
-                        <option value="<?php echo $row["id"] ?>">
-                            <?php echo $row["nome"] ?>
-                        </option>    
-                        <?php
-                    }
-                    ?>
-                </select>
-                <textarea ng-model="frases" placeholder="Escreva aqui a sua mensagem" class="form-control" id="txtpost" rows="3"></textarea>
-                <a  ng-click="enviar()" ><span class="btn btn-success glyphicon glyphicon-send pull-right" type="button" />  SEGUIR</a>
-                <a  ng-click="deletePost(p.idPost);" id="startedby"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" />  NAO SEGUIR</a>
+                    </select>
+     
+                   
+                    <textarea  name="mensagem" ng-model="frases" placeholder="Escreva aqui a sua mensagem" class="form-control" id="txtpost" rows="3"></textarea>
+                    <a  type="submit"><span class="btn btn-success glyphicon glyphicon-send pull-right" type="button" />  SEGUIR</a>
+                    <a  ng-click="deletePost(p.idPost);" id="startedby"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" />  NAO SEGUIR</a>
+                    <br>
                 </form>
             </div>
         </div>

@@ -2,13 +2,18 @@
 
 include './mysql/mysqlConnect.php';
 
-$mensagem = $_POST["mensagem"];
-
 //NOVO
 session_start();
-$destinatario = $_GET["destinatario"];
-$mensagem = $_POST["mensagem"];
+
+
 $id = $_SESSION["id"];
+$destinatario = $_POST[("#novoamigo").val];
+$nome = $_POST["nome"];
+$mensagem = $_POST["mensagem"];
+
+
+
+
 
 //$sql_Antes = "insert into mensagem (data,texto) VALUES(NOW(),'$mensagem')";
 $sql_novo = "insert into mensagem (data,texto,idAutor,idTarget) "
@@ -17,7 +22,7 @@ $sql_novo = "insert into mensagem (data,texto,idAutor,idTarget) "
 $GLOBALS["db.connection"]->query($sql_novo);
 
 $sql_novo = "insert into amigos (idAmigo1,idAmigo2) "
-        . " VALUES(NOW(),'$id'$destinatario)";
+        . " VALUES(NOW(),'id'$destinatario)";
 
 $GLOBALS["db.connection"]->query($sql_novo);
 

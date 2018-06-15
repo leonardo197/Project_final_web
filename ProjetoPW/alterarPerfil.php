@@ -19,7 +19,7 @@ $sql = "UPDATE utilizador SET username='$username',nome='$nome', email='$email',
 
 
 if ($GLOBALS["db.connection"]->query($sql) === TRUE) {
-    echo "Registo criado com sucesso";
+    echo "Registo mudado com sucesso";
 } else {
     echo "Erro: " . $sql . "<br>" . $GLOBALS["db.connection"]->error;
 }
