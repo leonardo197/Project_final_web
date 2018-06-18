@@ -174,7 +174,7 @@
                                 <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> {{p.nome}} |
                                 <label id="started">{{p.data}}</label> |
                                 <a href="" ng-click="removeLike(p.idPost, p.meulike);" id="startedby"><img src="img/{{p.meulike}}.png" style="height: 10px;"/></a> {{p.likes }} | 
-                                <a ng-click="deletePost(p.idPost);" ng-class="p.idAutor == <?php echo $id; ?> ? '' : 'invisible'" id="startedby" href="posts.php"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" /></a>
+                                <a ng-click="deletePost(p.idPost);" ng-class="p.idAutor == <?php echo $id; ?> ? '' : 'invisible'" id="startedby" href="index.php"><span class="btn btn-danger glyphicon glyphicon-trash pull-right" type="button" /></a>
                             </div>
                             <div class="panel-body">
                                 <p>{{p.texto}}</p>
